@@ -1,0 +1,2965 @@
+[
+  {
+    "id": 36,
+    "question": "A developer needs to render a component differently based on Edit mode vs Normal mode, and also access the current page's language. Which JSS hook is most appropriate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "useField",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "useSitecoreContext (or useSitecore)",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "useComponentProps",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "usePersonalization",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 37,
+    "question": "A marketing team wants to reuse a Promotional Banner (image, title, description, CTA) across multiple landing pages with the same structure but different content. Best content modeling approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use Rendering Parameters to store all banner content",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Embed banner content in Rich Text",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Create a Promotional Banner data template and define individual DataSource Items based on this template, which are then referenced by Promotional Banner renderings on various pages",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Duplicate the component on every page",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 38,
+    "question": "A developer needs to display the items selected in a multilist field called 'Related Products' within a product category component. Best way to retrieve and render?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Hardcode product IDs",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Access the field value of the multilist, which returns an array of item IDs, then query the data for each related item and render the results",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Use a separate API endpoint",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use rendering parameters",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 39,
+    "question": "How to use a multilist field in a frontend application?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a custom REST API",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Get data from field.value, get an array of item IDs",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Loop through the rendering parameters",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use placeholders",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 40,
+    "question": "What is the primary benefit of using a page design in XM Cloud Page Builder?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It eliminates the need for developer assistance",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "It ensures a consistent layout and style across all pages",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "It allows for the manual addition of headers and footers",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "It enables the creation of data templates",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 41,
+    "question": "What are partial designs in XM Cloud Page Builder primarily used for?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Serving as the schema for content",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Defining the overall presentation of a webpage",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Creating standalone webpages",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Reusing layout elements across multiple site locations",
+        "correct": true
+      }
+    ],
+    "answer": "D",
+    "multi": false
+  },
+  {
+    "id": 42,
+    "question": "What role do data templates play in XM Cloud Page Builder?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They create headers and footers",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "They serve as the schema for content",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "They combine partial designs",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "They define layout and style",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 43,
+    "question": "When mapping data from an XM data source to a component, what is the role of a Data Template?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It defines the final layout of the component",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "It generates the component's CSS styles",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "It specifies the data structure to be inserted into the component",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "It creates an automatic content item for the component",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 44,
+    "question": "What is the primary function of the XM Cloud Component's 'Canvas' section?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To preview components in different screen sizes",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "To configure the properties of elements",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "To assemble components by dragging and dropping elements",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "To access dynamic content linked to data sources",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 45,
+    "question": "What is the difference between a 'Card' element and a 'Block' element in the XM Cloud Components Builder?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A Card is static, while a Block supports dynamic content",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "A Card is a themable, nestable box, while a Block is an unstyled container",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "A Card is for text only, while a Block is for images",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "A Card cannot be resized, a Block can",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 46,
+    "question": "How can you ensure that a component is responsive on different devices when using the XM Cloud Components?",
+    "options": [
+      {
+        "key": "A",
+        "text": "By using only block elements",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "By using the Real-time Preview feature",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "By adjusting the layout for different screen sizes and creating specific versions of the component",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "By selecting a pre-set theme",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 47,
+    "question": "The XM Cloud Pages editor comes with a set of devices (e.g., Desktop Regular and Mobile) with predefined settings. Which fields must a developer specify to add and configure an additional device?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Device height, visibility, responsive breakpoints",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Device height, visibility, an icon",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Device width, Visibility, and an icon to represent the device",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Device width, Visibility, responsive breakpoints",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 50,
+    "question": "What is required to enable personalization in XM Cloud Pages?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A premium subscription plan",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "A custom domain name",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "A site assigned to a site identifier",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "A developer-configured webhook",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 51,
+    "question": "What is the primary goal of A/B/n testing?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To ensure every variant is unique",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "To finalize the layout",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "To define the variations to test and the metric for success",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "To assign visitor traffic to the winner",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 52,
+    "question": "What is the default behavior of an A/B/n test if the results are inconclusive?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Notify the administrator",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Continue running the test",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Automatically delete the test",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Assign traffic randomly",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 53,
+    "question": "How are page insights displayed in the Analyze mode of Page Builder?",
+    "options": [
+      {
+        "key": "A",
+        "text": "As detailed performance tables",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "In a heatmap format only",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "As line or column charts",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "In the Workflow Editor",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 54,
+    "question": "Which metric in site analytics indicates the average time visitors spend on the site?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Visits",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Visitors",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Average Time on Site",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Bounce Rate",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 55,
+    "question": "What must every workflow contain at a minimum?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Two workflow states",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "A publishing trigger",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "A review stage",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Approval and rejection commands",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 56,
+    "question": "What are the three fundamental components that define a SitecoreAI CMS workflow? (Select all that apply)",
+    "options": [
+      {
+        "key": "A",
+        "text": "Actions",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Commands",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Rules Engines",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "States",
+        "correct": true
+      }
+    ],
+    "answer": "A,B,D",
+    "multi": true
+  },
+  {
+    "id": 57,
+    "question": "In SitecoreAI CMS, a content editor has finished a new page, but only approved content strategists can publish to Experience Edge. What Sitecore security feature enforces this multi-step approval?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A custom content publishing workflow with approval states",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Sitecore CLI publishing restrictions",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Direct 'Publish' deny permissions",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Network firewall restrictions",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 58,
+    "question": "Cache clear after publishing is done — two relevant options:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Trigger a submit action when 'Approved' state is executed and submit action calls cache clear API in frontend application",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Use Admin API to create a webhook which listens on publishing events and then triggers cache clear API in frontend application when publishing is done",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Manually clear cache via the CM admin",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Wait for cache TTL to expire",
+        "correct": false
+      }
+    ],
+    "answer": "A,B",
+    "multi": true
+  },
+  {
+    "id": 59,
+    "question": "A page can be published even if it is not in the final workflow state.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "False",
+        "correct": true
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 60,
+    "question": "An item is currently in the 'Awaiting Approval' workflow state. Which is TRUE regarding its publishing status?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The item is locked for editing by all users",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "The item is not publishable by default, and can only be moved to another state via explicitly configured workflow commands",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Only Admin can move the item forward",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "The item is automatically published",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 61,
+    "question": "Which publishing option overwrites every item in the publishing target, even if it has not changed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Autopublish",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Preview publish",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Republish",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Smart publish",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 62,
+    "question": "A seasonal promotion page is no longer valid after December 31st. The marketing team needs to remove this page from the live website immediately after the promotion ends. Most direct way?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use 'Unpublish' or set a publishing end date",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Remove the file from the web server",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Set workflow state to Draft",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Delete the page item",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 63,
+    "question": "After making structural and content changes to a page in Page Builder, what are the essential final steps to make these changes live?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Just closing the browser tab",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Initiating a 'Publish' action for the page",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Only saving the page",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Exporting to XML",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 64,
+    "question": "What tasks are executed when publishing is triggered? (Multiple choice)",
+    "options": [
+      {
+        "key": "A",
+        "text": "Calculate additional entities",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Calculate Dependencies",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Resolve Dependencies",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Send notification emails",
+        "correct": false
+      }
+    ],
+    "answer": "A,B,C",
+    "multi": true
+  },
+  {
+    "id": 65,
+    "question": "What happens when you select 'Save and Activate' in the Forms Editor?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The form is saved as a template for future use",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "The form is saved and activated, changing its status to 'Active'",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "The form is saved but remains in draft status",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "The form is immediately published to the webpage",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 68,
+    "question": "A developer is tasked with creating an item using the Sitecore Authoring and Management GraphQL API. Which mutation creates a new item?",
+    "options": [
+      {
+        "key": "A",
+        "text": "createTemplateItem",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "updateItem",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "createItem",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "createOrUpdateItem",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 69,
+    "question": "What are the exact steps to query a GraphQL query in a frontend application?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a Query, add key and API",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Use a REST endpoint",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use a webhook",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use the Admin API",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 70,
+    "question": "How to enable access management for the Authoring API IDE / GraphQL Playground?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Sitecore_GraphQL_ExposePlayground with a value of true",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Enable via web.config only",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Manually copy the playground files",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Set a DNS entry",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 71,
+    "question": "When your GraphQL query is taking time and impacting performance, what can you do?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fetch only necessary fields from GraphQL and implement pagination",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Use REST instead",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Increase server CPU",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Cache the entire site",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 72,
+    "question": "When querying content from Experience Edge using GraphQL, what is the typical method for obtaining more than the default number of entities (e.g., more than 1000 items)?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Increase the 'maxItems' parameter",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Modify Experience Edge configuration in CM",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Make multiple independent queries",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Utilize pagination features like 'first', 'after', and 'endCursor'",
+        "correct": true
+      }
+    ],
+    "answer": "D",
+    "multi": false
+  },
+  {
+    "id": 73,
+    "question": "Beyond basic content and layout, what advanced information can be expected in the JSON output from the Layout Service? (Select all that apply)",
+    "options": [
+      {
+        "key": "A",
+        "text": "The complete compiled client-side JavaScript bundle",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Component-level data sources, including referenced content items and field values",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Personalization variants applicable to specific components or placeholders",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Rendering parameters for each component instance",
+        "correct": true
+      }
+    ],
+    "answer": "B,C,D",
+    "multi": true
+  },
+  {
+    "id": 74,
+    "question": "Which of the following statements are TRUE regarding data returned by Experience Edge APIs? (Select all that apply)",
+    "options": [
+      {
+        "key": "A",
+        "text": "Templates are stored as items and can be directly fetched using an item query",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Changes to rendering configurations or Layout Service extensions require republishing affected items to reflect on Edge",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Contextual or dynamic output from the Layout Service (based on user, query strings) is fully supported",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Experience Edge publishes a static snapshot of the Layout Service output at the time of publishing",
+        "correct": true
+      }
+    ],
+    "answer": "B,D",
+    "multi": true
+  },
+  {
+    "id": 75,
+    "question": "What is a key difference between Preview and Delivery GraphQL endpoints in Sitecore Experience Edge?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Preview endpoints access content in its current state (drafts), while Delivery endpoints access published content",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Preview requires no auth, Delivery does",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Preview is read-only, Delivery allows mutations",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Preview is for production",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 76,
+    "question": "When content is in draft state and you need to see how it will look in local code, which context ID will you use?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Preview Context ID",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Delivery Context ID",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Admin Context ID",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Live Context ID",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 78,
+    "question": "A developer is configuring a webhook for Sitecore Experience Edge. What is the key difference between OnEnd and OnUpdate execution modes?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OnUpdate allows custom body, OnEnd has fixed body",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "OnUpdate is deprecated",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "OnUpdate sends a request for each individual item change, while OnEnd sends a single request when the entire job is complete",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "OnEnd only works for publish events",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 81,
+    "question": "A GraphQL query against published content in Sitecore CMS returns an item, where the Delivery API token was generated from the Sitecore app. What does the payload contain?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The payload includes the token that needs to access the published content",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Only the item ID",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Plain HTML",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Encrypted item content",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 82,
+    "question": "Deployment failed. What should you check?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Go to XM Cloud Deploy App and check detailed logs of deployment",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Restart the developer machine",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Open a support ticket immediately",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Recreate the project",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 83,
+    "question": "How to trace intermittent deployment failures of XMC?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use only local logs",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Go to XM Cloud Deploy App, analyse logs of each step (provision, build, deployment, post-actions), trace and check logs",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Disable retries",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Reset the environment",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 84,
+    "question": "Which tool/resource is the primary source of information for troubleshooting deployment issues in SitecoreAI CMS?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Browser developer console",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Sitecore Cloud Portal status log",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Sitecore Cloud CLI commands and output",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "SitecoreAI Deploy App deployment logs",
+        "correct": true
+      }
+    ],
+    "answer": "D",
+    "multi": false
+  },
+  {
+    "id": 85,
+    "question": "What resources are created during the Provision step of deployment?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CM, Rendering Host and Experience Edge (plus databases, indexes, editing host)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Only CM",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Only Experience Edge",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Only rendering host",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 86,
+    "question": "When a developer deploys an SitecoreAI project to a new environment using the starter kit, which components are provisioned within the Sitecore-managed infrastructure? (Select all that apply)",
+    "options": [
+      {
+        "key": "A",
+        "text": "Databases",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Content management instance",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "The developer's local development environment",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "The Sitecore Cloud Portal",
+        "correct": false
+      },
+      {
+        "key": "E",
+        "text": "Indexes",
+        "correct": true
+      }
+    ],
+    "answer": "A,B,E,",
+    "multi": true
+  },
+  {
+    "id": 87,
+    "question": "A developer needs to create a new project in SitecoreAI. Which tool(s) can accomplish this? (Select all that apply)",
+    "options": [
+      {
+        "key": "A",
+        "text": "Experience Edge",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Sitecore Cloud Portal",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Deploy REST API",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "SitecoreAI Deploy app",
+        "correct": true
+      },
+      {
+        "key": "E",
+        "text": "Sitecore Cloud CLI",
+        "correct": true
+      }
+    ],
+    "answer": "B,C,D,E",
+    "multi": true
+  },
+  {
+    "id": 88,
+    "question": "What is the purpose of an 'Environment' in the SitecoreAI deployment structure?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To deliver website content to visitors",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "To manage subscriptions and user access",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "To group related sites",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "To provide an isolated instance for development, testing, or production",
+        "correct": true
+      }
+    ],
+    "answer": "D",
+    "multi": false
+  },
+  {
+    "id": 90,
+    "question": "A new team member is invited to the Sitecore Cloud Portal. They function as a developer (managing environments, deploying code — needs an App Role) but also need to manage other members within the organization and assign App Roles. Which role is most appropriate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The 'Organization Admin' role",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "The 'Project Administrator' app role",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "The 'Developer' app role",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "The 'Organization Owner' role",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 92,
+    "question": "An Org Owner doesn't want to allow developers to access the XMC Deploy App. How can developers still create projects and environments?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Using REST API or Sitecore Cloud CLI",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Use a different Cloud Portal",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use Sitecore Personalize",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use the Content Editor",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 93,
+    "question": "Developer wants to do CI/CD development. Org Owner doesn't want to allow developers to access XMC Deploy App. How can they create project and environment?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Using REST API or Sitecore Cloud CLI",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Hand-write XML files",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use FTP",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use the Content Editor",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 94,
+    "question": "From which command can a developer run code locally and see how it will work?",
+    "options": [
+      {
+        "key": "A",
+        "text": "npm start",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "npm run dev",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "npm run start:connected",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "npm run build",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 95,
+    "question": "Developer pushes code to a Feature Branch. The Sitecore AI CMS build fails. What would you check?",
+    "options": [
+      {
+        "key": "A",
+        "text": "sitecore.build.json",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Deployment log ( Correct as per Document)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Check the serialisation on local and push",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Reboot the build agent",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 96,
+    "question": "If a user doesn't want to use the predefined connector for code in the Deploy App, what can they do?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Using CLI automate process of deployment",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Use a database trigger",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use a webhook",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use a workflow action",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 97,
+    "question": "Deploying with a source provider that has a Git connector. What's the right approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the Sitecore CLI to create a deployment using the source provider's integration capabilities",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Manually FTP files",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Email the source code",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use only the Cloud Portal UI",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 98,
+    "question": "Developers need to create Sitecore environments as part of XM Cloud pipelines. Which tool/solution?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Sitecore Deployment App (or Cloud CLI for IaC-style pipelines)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Sitecore Forms",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Sitecore Personalize",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Sitecore Send",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 99,
+    "question": "A developer is responsible for a project that needs to be moved to a new repo due to company source strategy. What for the architect?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create the new Git repo and deploy to the environment pointing to the new repo",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Recreate the project from scratch",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Mirror the repo manually",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Ignore the change",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 100,
+    "question": "The development team needs to manage different API endpoints for development, staging, and production environments. Best approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Store all configuration data in a shared database",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Use environment variables managed through .env files, hosting provider settings, and SitecoreAI Deploy app with proper secret management",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Manually update config files before each deployment",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Hard-code endpoints in source code",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 101,
+    "question": "A CI/CD pipeline is configured to deploy serialized Sitecore items to a QA SitecoreAI CMS instance. The pipeline's build artifact contains the .itempackage. Which command applies this package to the remote QA instance?",
+    "options": [
+      {
+        "key": "A",
+        "text": "dotnet sitecore ser pull -n qa",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "dotnet sitecore ser pkg install -n qa",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "dotnet sitecore ser push -n qa",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "dotnet sitecore publish -n qa",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 102,
+    "question": "Which component of the SitecoreAI CMS architecture is responsible for delivering content to website visitors?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Editing Host",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Content Management (CM) instance",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Sitecore Cloud Portal",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Experience Edge",
+        "correct": true
+      }
+    ],
+    "answer": "D",
+    "multi": false
+  },
+  {
+    "id": 103,
+    "question": "What is the main function of the Rendering Host in SitecoreAI CMS?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To deploy code to environments",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "To retrieve content from Experience Edge and display the website to visitors",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "To store and manage content",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "To manage user access",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 104,
+    "question": "What is the primary benefit of using a headless CMS architecture in SitecoreAI?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Traditional page-based editing",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Content can be delivered to any channel or device through APIs, providing flexibility and future-proofing",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Reduces the need for developers",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Eliminates the need for a rendering host",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 105,
+    "question": "Which is a key advantage of SitecoreAI's SaaS architecture?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It provides scalability and flexibility, allowing resources to be adjusted based on demand",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "It limits content delivery to one channel",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "It increases deployment complexity",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "It eliminates updates",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 106,
+    "question": "A marketing team needs to share content between two related websites within their SitecoreAI CMS instance. Most efficient approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use different rendering hosts and external sync tools",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Store content in a separate headless CMS",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Place both websites within the same site collection to enable content sharing features",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Use different site collections and copy content manually",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 107,
+    "question": "Which statement best describes the relationship between sites and site collections in SitecoreAI CMS?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Every site must reside within a site collection, and a site collection can contain multiple sites",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Sites and site collections are independent",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Site collections are for authoring, sites for delivery",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "A site collection must contain only one site",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 108,
+    "question": "Global brand with country sites but branding is same and only different content. Best architecture?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Single rendering host with JSS multisite module",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "One rendering host per country",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Separate Sitecore instances per country",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Manual content duplication",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 109,
+    "question": "Multiple fashion brands with country sites in each brand. Recommended content structure?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a site collection for each brand and a site for each country within the brand's site collection",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "One mega-site for all brands",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Separate Sitecore instances per brand",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "One site per country regardless of brand",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 110,
+    "question": "A multinational clothing company is planning a structured online presence for its various brands and country-specific content. Which content architecture approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a site collection for each brand, and within each site collection, create a site for each country with language variants",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "One site for all",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Multiple Sitecore instances",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use external CMS",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 111,
+    "question": "What command should developers use to ensure that they don't forget to sync item updates done for developer-managed nodes in content tree?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Push command",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Pull command",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use Watch command",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Sync command",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 112,
+    "question": "What Sitecore Content Serialization command can a developer use to ensure they don't forget to pull changes made within a developer-managed location?",
+    "options": [
+      {
+        "key": "A",
+        "text": "watch",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "pull",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "push",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "sync",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 114,
+    "question": "A developer is setting up Sitecore Content Serialization for a new project. They need to define which specific Sitecore trees should be included or excluded. Main configuration file?",
+    "options": [
+      {
+        "key": "A",
+        "text": ".module.json file",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "package.json",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "config.json",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "sitecore.json (root config that references modules)",
+        "correct": true
+      }
+    ],
+    "answer": "A,D",
+    "multi": true
+  },
+  {
+    "id": 116,
+    "question": "Which file should a developer specify the fields they want to exclude in a Sitecore Content Serialization package?",
+    "options": [
+      {
+        "key": "A",
+        "text": "sitecore.json (or in module configuration files)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "package.json",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "web.config",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "appsettings.json",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 117,
+    "question": "A developer wants to create a serialization package (.itempackage) that includes only items defined by 'Feature.Analytics.module.json'. How to specify this module with ser package create?",
+    "options": [
+      {
+        "key": "A",
+        "text": "By setting a 'packageScope' property",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "By manually listing all items",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "By adding the module name to the output name",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "By using the '-i' or '--include' option with the module's name",
+        "correct": true
+      }
+    ],
+    "answer": "D",
+    "multi": false
+  },
+  {
+    "id": 118,
+    "question": "A developer defines a new include rule for content serialization. They do not explicitly set the allowedPushOperations property. What is the default behavior for push operations?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Creation, updates, and deletions are all allowed",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "No push operations are allowed",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Only new items can be created",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Only updates",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 119,
+    "question": "A content author is unable to edit a company webpage in Sitecore. Where is the best place to check if the user has Write access to this content item?",
+    "options": [
+      {
+        "key": "A",
+        "text": "User Manager",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Role Manager",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Access Viewer",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Security Editor",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 120,
+    "question": "A content editor reports they cannot see a specific news article in the content tree, although they believe they should have permission. Which security interface should an admin use to quickly determine effective permissions?",
+    "options": [
+      {
+        "key": "A",
+        "text": "User Manager",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Role Manager",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Access Viewer",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Security Editor",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 121,
+    "question": "User is not able to view and edit contents in the content tree. Where can a developer check rights overview?",
+    "options": [
+      {
+        "key": "A",
+        "text": "User Manager",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Access Viewer",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Workflow Editor",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Audit log",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 122,
+    "question": "What can a developer assign to a user in Security Editor? (Select all that apply)",
+    "options": [
+      {
+        "key": "A",
+        "text": "Write",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Read",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Debug",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Access",
+        "correct": false
+      },
+      {
+        "key": "E",
+        "text": "Create",
+        "correct": true
+      }
+    ],
+    "answer": "A,B,E",
+    "multi": true
+  },
+  {
+    "id": 123,
+    "question": "A developer is granting access rights to a role in Security Editor. Which permissions can they manage?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Read, Write, Delete, Admin",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Only Read and Write",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Inheritance only",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Custom permissions only",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 124,
+    "question": "A developer applies security on the editor. What options are visible? (Multiple choice)",
+    "options": [
+      {
+        "key": "A",
+        "text": "Read",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Write",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Inheritance",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Debug",
+        "correct": false
+      }
+    ],
+    "answer": "A,B,C",
+    "multi": true
+  },
+  {
+    "id": 125,
+    "question": "Team of developers working on the same project connected to a preview instance. How to manage their work?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a feature branch, their local env connects to the CM instance using preview API, test locally, then merge and deploy",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Everyone commits to main",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use a single shared local env",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use SFTP to deploy",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 126,
+    "question": "Benefit of Frontend First Approach in development?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Frontend developers can build components using mock data until last step of integration",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "It eliminates the need for content",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "It speeds up CMS deployments",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "It removes the need for backend developers",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 127,
+    "question": "A developer is working on a Sitecore site with SXA. They need to ensure a custom header and footer apply across all website pages after creating them. What's needed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Developer needs to add the header and footer components inside Partial Designs and then add those Partial Designs to the Page Designs used for creating pages",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Hardcode header/footer in HTML",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use rendering parameters",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Manually add on every page",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 128,
+    "question": "Sitecore developers want authors to easily create dynamic content items using options under content areas. Which field type?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Single-line text",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Droplink",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Tree list (allows multiple options through templates while remaining manageable)",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Checkbox",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 129,
+    "question": "Which component supports authoring in Page Designer and uses the Delivery API primarily for back-end data?",
+    "options": [
+      {
+        "key": "A",
+        "text": "JSS components (connect via data using standard HTML, elements, JSS components)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Static HTML components",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Sitecore Forms only",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Personalize components",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 130,
+    "question": "A developer implements a 'News Article' JSS component with short/full views. Content authors should choose short summary or full article. Approach?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the datasource template that includes both short summary and full body fields, and let the component (or rendering parameter) decide which to render",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Create two separate components",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use placeholders",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use HTML fragments",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 131,
+    "question": "Match the saving option in Forms Editor with its correct description. • Save as template • Save and activate • Save and exit",
+    "options": [
+      {
+        "key": "A",
+        "text": "Save as template → Saves your design as a reusable template",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Save and activate → Saves and changes the form status to Active on the dashboard",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Save and exit → Saves your design, closes the editor, and marks it with Autosave details",
+        "correct": true
+      }
+    ],
+    "answer": "A,B,C",
+    "multi": true
+  },
+  {
+    "id": 132,
+    "question": "Match the feature or action in the Forms app with its corresponding description. • Webhook testing in Settings • Styles tab • Logic tab",
+    "options": [
+      {
+        "key": "A",
+        "text": "Webhook testing in Settings → Tests data submission for accuracy",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Styles tab → Creates and applies custom form styles",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Logic tab → Adds conditions to show or require fields",
+        "correct": true
+      }
+    ],
+    "answer": "A,B,C",
+    "multi": true
+  },
+  {
+    "id": 133,
+    "question": "What are the functions of XM Cloud Page Builder? (Select all that apply)",
+    "options": [
+      {
+        "key": "A",
+        "text": "To add forms to web pages",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "To track visitor interactions using Analyze mode",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "To create and arrange page layouts with reusable components",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "To manage page versions",
+        "correct": true
+      }
+    ],
+    "answer": "B,C,D",
+    "multi": true
+  },
+  {
+    "id": 134,
+    "question": "What is the default frontend framework in XM Cloud / SitecoreAI CMS?",
+    "options": [
+      {
+        "key": "A",
+        "text": "React JS",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Vue",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Angular",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Svelte",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 135,
+    "question": "An authorization error from a Sitecore API call usually indicates what?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Invalid API key header",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "DNS misconfiguration",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Server is offline",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Wrong URL",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 136,
+    "question": "Naming collisions in the Experience Edge schema are resolved how?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The item or field with the newest creation date has _{guid} appended to its name",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "The older item is deleted",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Edge throws an error and blocks publish",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Items are merged",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 137,
+    "question": "Default pagination 'first' value in Experience Edge GraphQL?",
+    "options": [
+      {
+        "key": "A",
+        "text": "5",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "10",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "50",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "100",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 138,
+    "question": "To view or create webhooks in XM Cloud, what role do you need?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Developer or admin role",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Any user",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Only Organization Owner",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Only an API consumer",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 139,
+    "question": "In XM Cloud, there are three types of webhooks. What are they?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Webhook event handler, Webhook submit action, Webhook validation action",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Pre, During, Post",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Sync, Async, Batch",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Push, Pull, Polling",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 140,
+    "question": "What is required to register a BYOC (Bring Your Own Component) external React component?",
+    "options": [
+      {
+        "key": "A",
+        "text": "External React components must be imported and registered (referenced from external codebase and registered)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Copied to the CM database",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Compiled inside Sitecore",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Uploaded via Forms Editor",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 141,
+    "question": "A developer is building a homepage component using the Sitecore Content SDK with the Next.js App Router. The component must display rapidly changing stock market data while ensuring the rendered output is search engine indexable. Which rendering approach should the developer use?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use Static Site Generation (SSG) and fetch Content SDK data only at build time.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Use a Server Component to fetch the stock data on the server so the page is rendered with up-to-date, indexable HTML.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Use a Client Component and load the stock data in useEffect to update the UI after hydration.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use Incremental Static Regeneration (ISR) to revalidate the page every few seconds.",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 142,
+    "question": "Which rendering strategy should a developer use for a Sitecore Content SDK component that displays frequently changing stock market data on the homepage while ensuring search engines can index it accurately?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Continue using default Static Site Generation (SSG) and fetch data from Sitecore data directly with GraphQL API.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Implement Server-Side Rendering (SSR) for the component to ensure the stock data is always up-to-date on each request and is properly indexed by search engines.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Continue using Static Site Generation (SSG) and implement client-side data fetching with useEffect to update the stock data after the page loads.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use Incremental Static Regeneration (ISR) with a short revalidation period to periodically update the statically generated page.",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 143,
+    "question": "A web developer is tasked with retrieving content via GraphQL. They need to construct a GraphQL query to fetch the page title and content of a specific item and have the necessary API key and endpoint URL. What are the essential steps required to successfully query Experience Edge and retrieve the desired content?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Construct a GraphQL query, obtain a JWT, set the Authorization header with the JWT, and send the query to the endpoint.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Construct a GraphQL request, set the Authorization header with a Bearer token, send the request to the endpoint, and process the XML response.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Construct a GraphQL query, set the sc_apikey header with the access key, send the query to the endpoint, and parse the GraphQL-formatted response.",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Construct a GraphQL query, set the Content-Type header to application/json, send the query to the endpoint, and deserialize the JSON response.",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 144,
+    "question": "A developer has set up the Live GraphQL IDE to test queries against published content in Sitecore CMS. When running queries, the IDE returns an authentication failure. The developer has confirmed that the Delivery API token was generated from the Sitecore CMS Deploy app. Which is the most likely reason for this authentication failure?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The required Preview API key is invalid due to recent regeneration.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "The sc_apikey parameter is missing from the HTTP HEADERS.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "The developer lacks the necessary permissions to access published content.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "The queries reference fields that do not exist in the published schema.",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 145,
+    "question": "A developer constructed a GraphQL query to retrieve data for a component, but the query is consistently failing and returning an error. What is the most efficient method for troubleshooting GraphQL query when working with Experience Edge?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the Delivery API playground to test the query against published content, check the query syntax against the Experience Edge schema in the GraphQL IDE, and verify items have been published.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Decompile the Sitecore kernel DLLs to trace the query execution flow, use a network sniffer to capture the raw GraphQL request and response, and analyze the call stack for exceptions.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Consult the Sitecore compatibility table to ensure the GraphQL version is compatible with the installed Sitecore modules, disable all custom code in the Sitecore pipeline, and rebuild the entire Sitecore solution.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Examine the Sitecore logs on the CM server for detailed error messages, use the GraphQL IDE to validate the query syntax and schema, and check the Experience Edge rate limits in the response headers.",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 146,
+    "question": "A developer creates a new data template in a page-type structure. How can they ensure that the new template is available through Experience Edge?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the Experience Edge Admin API to add the template to the schema.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Add the relative path of the template in the Experience Edge config setup via patch file.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Create the template in the configured locations for Experience Edge (Paths: /sitecore/templates/Project/[your-tenant]).",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Create the template anywhere in the system templates folder.",
+        "correct": false
+      }
+    ],
+    "answer": "C",
+    "multi": false
+  },
+  {
+    "id": 147,
+    "question": "A developer is customizing a \"Promo\" component in SitecoreAI CMS. They want content editors to be able to adjust the component's appearance by setting custom CSS styles directly within the Page Builder. Which step is required to enable content editors to apply custom CSS styles?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a new rendering variant and allow content editors to select this variant when they want to apply custom CSS.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Add the IStyling base template to the rendering parameters template of the Promo component.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Define a data source template for the Promo component, including a field for CSS styles.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Set restrictions in the Content Editor to allow only components with style customization options in the relevant placeholders.",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 148,
+    "question": "When a developer is working in SitecoreAI CMS, they encounter two types of components: SitecoreAI CMS Components and Headless SXA Components. How can they differentiate between these two types of components?",
+    "options": [
+      {
+        "key": "A",
+        "text": "SitecoreAI CMS Components offer drag-and-drop construction of pages. Headless SXA Components require manual coding and can only be added to a page by a developer.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "SitecoreAI CMS Components are a low/no-code builder for creating components that can consume data from multiple data sources. Headless SXA Components require code that consumes data from the same data sources.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "SitecoreAI CMS Components provide responsive designs for different device types. Headless SXA Components are exclusively focused on static layouts.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "In SitecoreAI CMS Components, the Styles library ensures visual consistency. Headless SXA Components emphasize dynamic content mapping.",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  },
+  {
+    "id": 149,
+    "question": "A SitecoreAI CMS developer is tasked with implementing different display options for a \"News Article\" component using headless variants. The requirement is that content authors should be able to choose between a short summary view and a full article view directly in the Page Builder, without altering the underlying data. Which approach is the most appropriate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The developer needs to create the code for both article views in the component's TSX file and create corresponding variant definitions in the Content Editor, ensuring the code matches the names defined in the Content Editor.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "The developer should modify the data source template of the News Article component to include fields for both the short summary and full article content and then render the output in the component's TSX file.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "The developer should configure personalization rules within Pages Personalize to display either view based on user behavior or profile data.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "The developer is required to implement dynamic placeholders within the News Article component, allowing content authors to drag and drop a Summary or Full Article component.",
+        "correct": false
+      }
+    ],
+    "answer": "A",
+    "multi": false
+  },
+  {
+    "id": 151,
+    "question": "A developer wants to deploy to Sitecore XM Cloud (SitecoreAI CMS), but the project is NOT using a source code provider that has an out-of-the-box connector for Sitecore XM Cloud. How can they deploy the site to Sitecore XM Cloud?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create Sitecore Update Packages (using SCS) containing all necessary items and files and then deploy these packages to the Sitecore XM Cloud environment.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Develop a custom connector for the Sitecore Deploy app, tailored to the specific source code provider, to enable direct deployments.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Use Vercel as an intermediary platform to connect to the source code provider and then deploy to Sitecore XM Cloud, leveraging Vercel's integration capabilities.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Employ the Sitecore Cloud CLI to create a project and utilizing scripting to automate the deployment process from the source code provider.",
+        "correct": true
+      }
+    ],
+    "answer": "D",
+    "multi": false
+  },
+  {
+    "id": 152,
+    "question": "A Sitecore architect is responsible for managing a project that needs to be moved to a new repository due to a change in the company's source control strategy. Which steps should the architect take according to Sitecore's recommended practices?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Export the entire SitecoreAI CMS project as a single package using Sitecore Content Serialization (SCS) and import it into the new repository.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Modify the local Git repository configuration to point to the new repository and push all changes to the remote Git repository.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Delete the existing project with Sitecore AI CMS Deploy app and create a new one pointing to the new repository, manually recreating all environments and configurations.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Edit the project in Sitecore AI Deploy app, update the repository details to point to the new repository, ensuring to select the appropriate branch for each environment. Next, manually create a build and deploy it to the environment.",
+        "correct": true
+      }
+    ],
+    "answer": "D",
+    "multi": false
+  },
+  {
+    "id": 153,
+    "question": "A front-end developer is building a new component to display content fetched from Sitecore AI CMS. The component should dynamically render data such as text and images and support content authoring within the Page Builder. Which approach is most appropriate?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Directly query the Delivery API within the component using fetch then manually render the data using standard HTML elements, bypassing Content SDK components.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Use Content SDK field helper components to render the data, ensuring compatibility with the Page Builder and dynamic data updates from the Delivery API.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Create a static component with hardcoded content and layout, as the Delivery API is primarily for backend data retrieval.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Fetch the layout data directly from the Sitecore database instead of using the Delivery API, parse this data to render the component using custom JavaScript logic.",
+        "correct": false
+      }
+    ],
+    "answer": "B",
+    "multi": false
+  }
+]

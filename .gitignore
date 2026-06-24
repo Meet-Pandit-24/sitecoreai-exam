@@ -1,0 +1,35 @@
+# Environment & Secrets
+.env
+.env.local
+*.pem
+*.key
+
+# Node modules
+node_modules/
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build scripts (already run, don't commit)
+*.pyc
+__pycache__/
+
+# Logs
+logs/
+*.log
+
+# Temporary
+temp/
+tmp/
+
+# Keep these (important files)
+# !.env.example
+# !README.md
+# !DEPLOYMENT_GUIDE.md
