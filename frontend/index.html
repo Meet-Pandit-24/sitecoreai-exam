@@ -7,9 +7,15 @@
 </head>
 <body>
     <script>
-        // Redirect to exam-enhanced.html
-        window.location.href = '/exam-enhanced.html';
+        const token = localStorage.getItem('token');
+        if (token) {
+            // User is logged in, redirect to exam
+            window.location.href = '/exam-enhanced.html';
+        } else {
+            // No token, redirect to login
+            window.location.href = '/login.html';
+        }
     </script>
-    <p>Redirecting to exam...</p>
+    <p>Redirecting...</p>
 </body>
 </html>
