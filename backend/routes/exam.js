@@ -119,7 +119,7 @@ async function sendResultEmail(email, name, result) {
   `;
 
   return mailer.sendMail({
-    from: process.env.SMTP_USER,
+    from: process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com',
     to: email,
     subject,
     html

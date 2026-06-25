@@ -38,7 +38,7 @@ router.post('/request-otp', async (req, res) => {
 
     // Send OTP email
     await mailer.sendMail({
-      from: process.env.SMTP_USER,
+      from: process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com',
       to: email,
       subject: 'SitecoreAI Exam - Login Code',
       html: `
