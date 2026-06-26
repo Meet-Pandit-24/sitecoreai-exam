@@ -8,25 +8,42 @@ async function sendEmail(to, subject, html) {
   const fromEmail = process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com';
 
   console.log('[Email] Sending via SendGrid API');
-  const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
-      from: { email: fromEmail },
-      subject: subject,
-      content: [{ type: 'text/html', value: html }]
-    })
-  });
+  console.log('[Email] To:', to);
+  console.log('[Email] From:', fromEmail);
+  console.log('[Email] Subject:', subject);
+  console.log('[Email] API Key present:', !!apiKey, apiKey ? apiKey.substring(0, 10) + '...' : 'MISSING');
 
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`SendGrid API error: ${response.status} - ${error}`);
+  const payload = {
+    personalizations: [{ to: [{ email: to }] }],
+    from: { email: fromEmail },
+    subject: subject,
+    content: [{ type: 'text/html', value: html }]
+  };
+
+  console.log('[Email] Payload:', JSON.stringify(payload, null, 2));
+
+  try {
+    const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    console.log('[Email] Response status:', response.status);
+    const responseText = await response.text();
+    console.log('[Email] Response body:', responseText);
+
+    if (!response.ok) {
+      throw new Error(`SendGrid API error: ${response.status} - ${responseText}`);
+    }
+    console.log('[Email] Sent successfully via SendGrid API');
+  } catch(err) {
+    console.error('[Email] ERROR:', err.message);
+    throw err;
   }
-  console.log('[Email] Sent successfully via SendGrid API');
 }
 
 // Request OTP
