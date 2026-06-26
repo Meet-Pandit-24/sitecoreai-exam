@@ -5,14 +5,14 @@ const ExamResult = require('../models/ExamResult');
 const User = require('../models/User');
 
 async function sendEmail(to, subject, html) {
+  console.log('[Email-DEBUG] ===== START SENDGRID EMAIL SEND =====');
   const apiKey = process.env.SMTP_PASS;
   const fromEmail = process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com';
 
-  console.log('[Email] Sending via SendGrid API');
-  console.log('[Email] To:', to);
-  console.log('[Email] From:', fromEmail);
-  console.log('[Email] Subject:', subject);
-  console.log('[Email] API Key present:', !!apiKey, apiKey ? apiKey.substring(0, 10) + '...' : 'MISSING');
+  console.log('[Email-DEBUG] API Key:', apiKey ? 'EXISTS-' + apiKey.substring(0, 10) : 'MISSING!!');
+  console.log('[Email-DEBUG] FROM_EMAIL:', fromEmail);
+  console.log('[Email-DEBUG] TO_EMAIL:', to);
+  console.log('[Email-DEBUG] SUBJECT:', subject);
 
   const payload = {
     personalizations: [{ to: [{ email: to }] }],
@@ -22,6 +22,7 @@ async function sendEmail(to, subject, html) {
   };
 
   try {
+    console.log('[Email-DEBUG] Making SendGrid API call...');
     const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
       headers: {
@@ -31,16 +32,18 @@ async function sendEmail(to, subject, html) {
       body: JSON.stringify(payload)
     });
 
-    console.log('[Email] Response status:', response.status);
+    console.log('[Email-DEBUG] Response Status Code:', response.status);
     const responseText = await response.text();
-    console.log('[Email] Response body:', responseText);
+    console.log('[Email-DEBUG] Response Body:', responseText);
 
     if (!response.ok) {
+      console.log('[Email-DEBUG] ERROR: NOT OK RESPONSE');
       throw new Error(`SendGrid API error: ${response.status} - ${responseText}`);
     }
-    console.log('[Email] Sent successfully via SendGrid API');
+    console.log('[Email-DEBUG] ===== SUCCESS: EMAIL SENT =====');
   } catch(err) {
-    console.error('[Email] ERROR:', err.message);
+    console.error('[Email-DEBUG] CATCH ERROR:', err.message);
+    console.error('[Email-DEBUG] Stack:', err.stack);
     throw err;
   }
 }
