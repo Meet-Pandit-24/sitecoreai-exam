@@ -17,16 +17,20 @@ const mailer = nodemailer.createTransport({
 router.post('/request-otp', async (req, res) => {
   try {
     const { email } = req.body;
+    console.log('[OTP] Request started for:', email);
 
     // Verify email is from allowed domain
     if (!email.endsWith('@horizontal.com')) {
+      console.log('[OTP] Invalid domain:', email);
       return res.status(403).json({ error: 'Only @horizontal.com emails allowed' });
     }
 
     // Generate 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const expiry = new Date(Date.now() + 15 * 60000); // 15 minutes
+    console.log('[OTP] Generated OTP:', otp);
 
+    console.log('[OTP] Querying database...');
     let user = await User.findOne({ email });
     if (!user) {
       user = new User({ email, otpCode: otp, otpExpires: expiry });
@@ -35,8 +39,10 @@ router.post('/request-otp', async (req, res) => {
       user.otpExpires = expiry;
     }
     await user.save();
+    console.log('[OTP] User saved to database');
 
     // Send OTP email
+    console.log('[OTP] Sending email from:', process.env.FROM_EMAIL, 'to:', email);
     await mailer.sendMail({
       from: process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com',
       to: email,
@@ -47,9 +53,11 @@ router.post('/request-otp', async (req, res) => {
         <p>Code expires in 15 minutes.</p>
       `
     });
+    console.log('[OTP] Email sent successfully');
 
     res.json({ message: 'OTP sent to email', email });
   } catch(err) {
+    console.error('[OTP] Error:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
