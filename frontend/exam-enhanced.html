@@ -36,22 +36,25 @@
   .info-card .val { font-size:28px; font-weight:800; color:var(--accent2); }
   .info-card .lbl { font-size:11px; color:var(--muted); margin-top:6px; text-transform:uppercase; letter-spacing:0.5px; }
 
-  .config-section { background:linear-gradient(135deg, var(--card) 0%, #1e2237 100%); border:2px solid var(--border); border-radius:var(--radius); padding:24px; max-width:520px; width:100%; margin-bottom:24px; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
-  .config-row { margin-bottom:18px; }
-  .config-row:last-child { margin-bottom:0; }
-  .config-label { font-size:12px; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.6px; font-weight:600; }
-  .select-group { display:flex; gap:10px; flex-wrap:wrap; }
-  select {
-    flex:1; min-width:140px; padding:11px 14px; border-radius:8px; border:1px solid var(--border);
-    background:var(--card2); color:var(--text); font-size:14px; cursor:pointer; transition:all 0.2s;
-  }
-  select:hover { border-color:var(--accent); }
-  select:focus { outline:none; border-color:var(--accent); box-shadow:0 0 8px rgba(229, 57, 53, 0.2); }
+  .welcome-wrapper { display:flex; flex-direction:column; align-items:center; gap:32px; }
 
-  .start-btn { padding:16px 52px; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#fff; border:none; border-radius:var(--radius); font-size:18px; font-weight:700; cursor:pointer; transition:all 0.3s; width:100%; box-shadow:0 4px 12px rgba(229, 57, 53, 0.3); }
-  .start-btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(229, 57, 53, 0.4); }
-  .start-btn:active { transform:translateY(-1px); }
-  .tip { font-size:12px; color:var(--muted); margin-top:18px; font-style:italic; }
+  .config-section { background:linear-gradient(135deg, var(--card) 0%, #1e2237 100%); border:2px solid var(--border); border-radius:var(--radius); padding:32px; max-width:580px; width:100%; box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+  .config-row { margin-bottom:22px; }
+  .config-row:last-child { margin-bottom:0; }
+  .config-label { font-size:11px; color:var(--muted); margin-bottom:10px; text-transform:uppercase; letter-spacing:.7px; font-weight:700; }
+  .select-group { display:flex; gap:12px; flex-wrap:wrap; }
+  select {
+    flex:1; min-width:160px; padding:13px 16px; border-radius:10px; border:1px solid var(--border);
+    background:var(--card2); color:var(--text); font-size:14px; font-weight:500; cursor:pointer; transition:all 0.2s;
+  }
+  select:hover { border-color:var(--accent); background:#232d3f; }
+  select:focus { outline:none; border-color:var(--accent); box-shadow:0 0 12px rgba(229, 57, 53, 0.25); }
+
+  .button-wrapper { display:flex; gap:12px; justify-content:center; margin-top:8px; }
+  .start-btn { padding:14px 40px; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#fff; border:none; border-radius:10px; font-size:16px; font-weight:700; cursor:pointer; transition:all 0.3s; white-space:nowrap; box-shadow:0 4px 14px rgba(229, 57, 53, 0.3); }
+  .start-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(229, 57, 53, 0.4); }
+  .start-btn:active { transform:translateY(0px); }
+  .tip { font-size:12px; color:var(--muted); margin-top:12px; font-style:italic; letter-spacing:0.2px; }
 
   /* ── EXAM LAYOUT ── */
   #exam { display:none; height:100vh; flex-direction:column; }
@@ -183,6 +186,7 @@
     <div class="info-card"><div class="val">283</div><div class="lbl">Practice Bank</div></div>
   </div>
 
+  <div class="welcome-wrapper">
   <div class="config-section">
     <div class="config-row">
       <label class="config-label">Number of Questions</label>
@@ -225,8 +229,11 @@
     </div>
   </div>
 
-  <button class="start-btn" onclick="startExam()">Start Exam →</button>
+  <div class="button-wrapper">
+    <button class="start-btn" onclick="startExam()">Start Exam</button>
+  </div>
   <p class="tip">💡 Tip: Use ← → arrow keys to navigate, 1-5 to select options, M to mark for review</p>
+  </div>
 </div>
 
 <div id="exam">
