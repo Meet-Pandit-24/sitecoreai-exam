@@ -1,20 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 const User = require('../models/User');
 
-const mailer = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.sendgrid.net',
-  port: parseInt(process.env.SMTP_PORT) || 465,
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  },
-  connectionTimeout: 5000,
-  socketTimeout: 5000
-});
+async function sendEmail(to, subject, html) {
+  const apiKey = process.env.SMTP_PASS;
+  const fromEmail = process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com';
+
+  console.log('[Email] Sending via SendGrid API');
+  const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      personalizations: [{ to: [{ email: to }] }],
+      from: { email: fromEmail },
+      subject: subject,
+      content: [{ type: 'text/html', value: html }]
+    })
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`SendGrid API error: ${response.status} - ${error}`);
+  }
+  console.log('[Email] Sent successfully via SendGrid API');
+}
 
 // Request OTP
 router.post('/request-otp', async (req, res) => {
@@ -46,16 +59,11 @@ router.post('/request-otp', async (req, res) => {
 
     // Send OTP email
     console.log('[OTP] Sending email from:', process.env.FROM_EMAIL, 'to:', email);
-    await mailer.sendMail({
-      from: process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com',
-      to: email,
-      subject: 'SitecoreAI Exam - Login Code',
-      html: `
-        <h2>Your OTP Code</h2>
-        <p>Use this code to log in: <strong>${otp}</strong></p>
-        <p>Code expires in 15 minutes.</p>
-      `
-    });
+    await sendEmail(email, 'SitecoreAI Exam - Login Code', `
+      <h2>Your OTP Code</h2>
+      <p>Use this code to log in: <strong>${otp}</strong></p>
+      <p>Code expires in 15 minutes.</p>
+    `);
     console.log('[OTP] Email sent successfully');
 
     res.json({ message: 'OTP sent to email', email });

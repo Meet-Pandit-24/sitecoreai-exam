@@ -3,19 +3,30 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const ExamResult = require('../models/ExamResult');
 const User = require('../models/User');
-const nodemailer = require('nodemailer');
 
-const mailer = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.sendgrid.net',
-  port: parseInt(process.env.SMTP_PORT) || 465,
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  },
-  connectionTimeout: 5000,
-  socketTimeout: 5000
-});
+async function sendEmail(to, subject, html) {
+  const apiKey = process.env.SMTP_PASS;
+  const fromEmail = process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com';
+
+  const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      personalizations: [{ to: [{ email: to }] }],
+      from: { email: fromEmail },
+      subject: subject,
+      content: [{ type: 'text/html', value: html }]
+    })
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`SendGrid API error: ${response.status} - ${error}`);
+  }
+}
 
 // Middleware: Verify JWT
 const authenticate = (req, res, next) => {
@@ -121,12 +132,7 @@ async function sendResultEmail(email, name, result) {
     <p><a href="${process.env.FRONTEND_URL || 'http://localhost:5000'}/results/${result._id}">View Full Results →</a></p>
   `;
 
-  return mailer.sendMail({
-    from: process.env.FROM_EMAIL || 'noreply@sitecoreai-exam.com',
-    to: email,
-    subject,
-    html
-  });
+  return sendEmail(email, subject, html);
 }
 
 module.exports = router;
