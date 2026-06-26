@@ -71,9 +71,13 @@ router.post('/submit', authenticate, async (req, res) => {
     });
 
     await result.save();
+    console.log('[EXAM] Result saved:', result._id);
 
     // Send result email (async, don't wait)
-    sendResultEmail(user.email, user.name, result).catch(console.error);
+    console.log('[EXAM] Sending result email to:', user.email);
+    sendResultEmail(user.email, user.name, result)
+      .then(() => console.log('[EXAM] Result email sent successfully'))
+      .catch(err => console.error('[EXAM] Result email error:', err.message));
 
     res.json({
       resultId: result._id,
@@ -116,6 +120,7 @@ router.get('/:resultId', authenticate, async (req, res) => {
 
 // Helper: Send result email
 async function sendResultEmail(email, name, result) {
+  console.log('[EMAIL] Starting result email process for:', email);
   const subject = result.passed ? '✓ Exam Passed!' : '✗ Exam Not Passed';
   const html = `
     <h2>${subject}</h2>
@@ -129,9 +134,10 @@ async function sendResultEmail(email, name, result) {
       <li><strong>Time Used:</strong> ${Math.floor(result.timeUsed / 60)}m</li>
       <li><strong>Pass Score:</strong> ${result.passScore}%</li>
     </ul>
-    <p><a href="${process.env.FRONTEND_URL || 'http://localhost:5000'}/results/${result._id}">View Full Results →</a></p>
+    <p><a href="${process.env.FRONTEND_URL || 'https://sitecoreai-exam.vercel.app'}/dashboard">View Full Results →</a></p>
   `;
 
+  console.log('[EMAIL] Calling sendEmail with subject:', subject);
   return sendEmail(email, subject, html);
 }
 

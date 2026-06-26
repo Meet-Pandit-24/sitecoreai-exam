@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Results Dashboard - SitecoreAI</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card2: #222535;
+    --border: #2d3148;
+    --accent: #e53935;
+    --accent2: #ff6659;
+    --text: #e8eaf6;
+    --muted: #8f9bb3;
+    --correct: #00c853;
+    --wrong: #f44336;
+  }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .topbar { background:linear-gradient(135deg, var(--card) 0%, #1a1f2e 100%); border-bottom:2px solid var(--accent); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+  .topbar-left { display:flex; align-items:center; gap:16px; flex:1; }
+  .topbar-title { font-size:18px; font-weight:700; color:#fff; letter-spacing:0.5px; }
+  .topbar-right { display:flex; align-items:center; gap:16px; }
+  .user-info { font-size:12px; color:var(--muted); }
+  .logout-btn { padding:8px 16px; background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:6px; cursor:pointer; font-size:12px; transition:all 0.2s; }
+  .logout-btn:hover { border-color:var(--accent); color:var(--text); }
+
+  .dashboard-container { max-width:1200px; margin:0 auto; padding:28px; }
+  .header { margin-bottom:32px; }
+  .header h1 { font-size:28px; font-weight:700; margin-bottom:8px; }
+  .header p { color:var(--muted); font-size:14px; }
+
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:32px; }
+  .stat-card { background:linear-gradient(135deg, var(--card) 0%, #1e2237 100%); border:1px solid var(--border); border-radius:10px; padding:20px; }
+  .stat-value { font-size:32px; font-weight:700; color:var(--accent2); }
+  .stat-label { font-size:12px; color:var(--muted); margin-top:8px; text-transform:uppercase; letter-spacing:0.5px; }
+
+  .results-section h2 { font-size:20px; font-weight:700; margin-bottom:16px; }
+  .results-table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  .results-table th { background:linear-gradient(135deg, var(--card) 0%, #1e2237 100%); padding:16px; text-align:left; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600; border-bottom:2px solid var(--border); }
+  .results-table td { padding:16px; border-bottom:1px solid var(--border); }
+  .results-table tbody tr:hover { background:var(--card2); }
+  .results-table tbody tr:last-child td { border-bottom:none; }
+
+  .score { font-weight:700; font-size:16px; }
+  .score.passed { color:var(--correct); }
+  .score.failed { color:var(--wrong); }
+
+  .status-badge { display:inline-block; padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600; }
+  .status-passed { background:#0d2a1a; color:var(--correct); }
+  .status-failed { background:#2a0d0d; color:var(--wrong); }
+
+  .view-btn { padding:8px 14px; background:var(--accent); color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; transition:all 0.2s; }
+  .view-btn:hover { background:var(--accent2); }
+
+  .empty-state { text-align:center; padding:60px 20px; color:var(--muted); }
+  .empty-state h3 { font-size:18px; margin-bottom:8px; }
+  .empty-state p { font-size:14px; }
+
+  .back-link { display:inline-block; margin-bottom:20px; padding:8px 16px; background:transparent; border:1px solid var(--border); color:var(--text); border-radius:6px; text-decoration:none; cursor:pointer; transition:all 0.2s; font-size:13px; }
+  .back-link:hover { border-color:var(--accent); color:var(--accent2); }
+
+  .loading { text-align:center; padding:40px; color:var(--muted); }
+  .error { background:#2a0d0d; border:1px solid var(--wrong); color:#ef9a9a; padding:16px; border-radius:8px; margin-bottom:20px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-title">📊 Results Dashboard</div>
+  </div>
+  <div class="topbar-right">
+    <div class="user-info" id="userInfo">Loading...</div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <a href="/exam-enhanced.html" class="back-link">← Back to Exam</a>
+
+  <div class="header">
+    <h1>Your Exam Results</h1>
+    <p>View all your exam attempts and performance details</p>
+  </div>
+
+  <div id="errorMsg" class="error" style="display:none;"></div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value" id="totalAttempts">0</div>
+      <div class="stat-label">Total Attempts</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="passedCount">0</div>
+      <div class="stat-label">Passed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="failedCount">0</div>
+      <div class="stat-label">Failed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="avgScore">0%</div>
+      <div class="stat-label">Average Score</div>
+    </div>
+  </div>
+
+  <div class="results-section">
+    <h2>All Attempts</h2>
+    <div id="loadingMsg" class="loading">Loading your results...</div>
+    <div id="emptyMsg" class="empty-state" style="display:none;">
+      <h3>No exam attempts yet</h3>
+      <p><a href="/exam-enhanced.html" class="back-link">Start your first exam →</a></p>
+    </div>
+    <table class="results-table" id="resultsTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Score</th>
+          <th>Correct</th>
+          <th>Wrong</th>
+          <th>Skipped</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const API_BASE = 'https://sitecoreai-exam-production.up.railway.app';
+
+async function logout() {
+  if (confirm('Are you sure you want to log out?')) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = '/login.html';
+  }
+}
+
+async function loadResults() {
+  try {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    if (!token || !user.email) {
+      window.location.href = '/login.html';
+      return;
+    }
+
+    document.getElementById('userInfo').textContent = user.email;
+
+    const res = await fetch(`${API_BASE}/api/exam/history`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (!res.ok) throw new Error('Failed to load results');
+
+    const results = await res.json();
+    displayResults(results);
+  } catch(err) {
+    document.getElementById('errorMsg').textContent = 'Error: ' + err.message;
+    document.getElementById('errorMsg').style.display = 'block';
+  }
+}
+
+function displayResults(results) {
+  document.getElementById('loadingMsg').style.display = 'none';
+
+  if (!results || results.length === 0) {
+    document.getElementById('emptyMsg').style.display = 'block';
+    return;
+  }
+
+  // Calculate stats
+  const passed = results.filter(r => r.passed).length;
+  const failed = results.length - passed;
+  const avgScore = Math.round(results.reduce((sum, r) => sum + r.scorePercentage, 0) / results.length);
+
+  document.getElementById('totalAttempts').textContent = results.length;
+  document.getElementById('passedCount').textContent = passed;
+  document.getElementById('failedCount').textContent = failed;
+  document.getElementById('avgScore').textContent = avgScore + '%';
+
+  // Display table
+  document.getElementById('resultsTable').style.display = 'table';
+  const tbody = document.getElementById('resultsBody');
+  tbody.innerHTML = results.map(r => `
+    <tr>
+      <td>${new Date(r.createdAt).toLocaleDateString()} ${new Date(r.createdAt).toLocaleTimeString()}</td>
+      <td><span class="score ${r.passed ? 'passed' : 'failed'}">${r.scorePercentage}%</span></td>
+      <td style="color:var(--correct);">${r.correct}</td>
+      <td style="color:var(--wrong);">${r.wrong}</td>
+      <td style="color:var(--muted);">${r.skipped}</td>
+      <td>${Math.floor(r.timeUsed / 60)}m ${(r.timeUsed % 60)}s</td>
+      <td><span class="status-badge ${r.passed ? 'status-passed' : 'status-failed'}">${r.passed ? 'PASSED' : 'FAILED'}</span></td>
+      <td><button class="view-btn" onclick="viewDetails('${r._id}')">View</button></td>
+    </tr>
+  `).join('');
+}
+
+function viewDetails(resultId) {
+  alert('Detailed view coming soon! Result ID: ' + resultId);
+}
+
+// Load results on page load
+document.addEventListener('DOMContentLoaded', loadResults);
+</script>
+
+</body>
+</html>
