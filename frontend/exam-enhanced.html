@@ -175,6 +175,11 @@
 <body>
 
 <div id="welcome">
+  <div style="position:absolute;top:20px;right:24px;display:flex;align-items:center;gap:16px;">
+    <span id="userEmailWelcome" style="font-size:13px;color:var(--muted);">Loading...</span>
+    <button onclick="logout()" style="padding:8px 16px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:12px;transition:all 0.2s;">Logout</button>
+  </div>
+
   <div class="logo">🎓</div>
   <h1>SitecoreAI CMS Developer Certification</h1>
   <p class="subtitle">Official Exam Simulator — 283 Questions (V3 + V4 Verified)</p>
@@ -596,6 +601,10 @@ function initializeUserInfo() {
   if (user.email) {
     document.getElementById('userInfo').textContent = user.email;
     document.getElementById('logoutBtn').style.display = 'block';
+    const userEmailWelcome = document.getElementById('userEmailWelcome');
+    if (userEmailWelcome) {
+      userEmailWelcome.textContent = user.email;
+    }
   } else {
     window.location.href = '/login.html';
   }
