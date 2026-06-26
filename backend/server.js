@@ -26,7 +26,33 @@ app.use('/api/questions', require('./routes/questions'));
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  });
+});
+
+// Database health check
+app.get('/api/health/db', async (req, res) => {
+  try {
+    const state = mongoose.connection.readyState;
+    const states = { 0: 'disconnected', 1: 'connected', 2: 'connecting', 3: 'disconnecting' };
+    res.json({
+      status: 'ok',
+      mongodb: {
+        state: states[state],
+        connected: state === 1
+      },
+      timestamp: new Date().toISOString()
+    });
+  } catch(err) {
+    res.status(500).json({
+      status: 'error',
+      mongodb: { connected: false, error: err.message },
+      timestamp: new Date().toISOString()
+    });
+  }
 });
 
 // Serve static frontend (in production)
