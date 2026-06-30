@@ -264,7 +264,8 @@ async function loadResults() {
     });
     if (!res.ok) throw new Error('Failed to load results');
 
-    const results = await res.json();
+    const data = await res.json();
+    const results = data.results || data;
     document.getElementById('resultsLoading').style.display = 'none';
 
     if (!results || results.length === 0) {
@@ -316,8 +317,8 @@ async function loadReports() {
         <td>${r.reportedBy || 'Anonymous'}</td>
         <td>${r.issue.substring(0, 50)}...</td>
         <td>${new Date(r.createdAt).toLocaleDateString()}</td>
-        <td><span class="badge" style="background:${r.resolved ? '#0d2a1a' : '#2a2a0d'}; color:${r.resolved ? 'var(--correct)' : '#ffa000'};">${r.resolved ? 'RESOLVED' : 'OPEN'}</span></td>
-        <td><button class="action-btn" onclick="markResolved('${r._id}')">Resolve</button></td>
+        <td><span class="badge" style="background:${r.status === 'resolved' ? '#0d2a1a' : '#2a2a0d'}; color:${r.status === 'resolved' ? 'var(--correct)' : '#ffa000'};">${r.status === 'resolved' ? 'RESOLVED' : 'PENDING'}</span></td>
+        <td>${r.status === 'resolved' ? '-' : `<button class="action-btn" onclick="markResolved('${r._id}')">Resolve</button>`}</td>
       </tr>
     `).join('');
   } catch(err) {
@@ -335,7 +336,7 @@ async function markResolved(reportId) {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ resolved: true })
+      body: JSON.stringify({ status: 'resolved' })
     });
     if (!res.ok) throw new Error('Failed to resolve report');
     loadReports();
