@@ -12,6 +12,15 @@ async function seedQuestions() {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('✅ Connected to MongoDB');
 
+    // Drop old index if it exists
+    try {
+      console.log('🔧 Removing old indexes...');
+      await Question.collection.dropIndex('id_1');
+      console.log('✅ Old index removed');
+    } catch(err) {
+      // Index doesn't exist, that's fine
+    }
+
     // Read exam-enhanced.html file
     const htmlPath = path.join(__dirname, '../../frontend/exam-enhanced.html');
     const htmlContent = fs.readFileSync(htmlPath, 'utf-8');
@@ -36,7 +45,7 @@ async function seedQuestions() {
       verified: true
     }));
 
-    // Clear existing questions (optional - comment out to keep existing)
+    // Clear existing questions
     const deleteResult = await Question.deleteMany({});
     console.log(`🗑️  Deleted ${deleteResult.deletedCount} existing questions`);
 
