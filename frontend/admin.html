@@ -59,8 +59,32 @@
 
   .action-btn { padding:8px 14px; background:var(--accent); color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; transition:all 0.2s; }
   .action-btn:hover { background:#ff6659; }
+  .action-btn-secondary { background:var(--border); }
+  .action-btn-secondary:hover { background:#3a4158; }
+  .action-btn-danger { background:#f44336; }
+  .action-btn-danger:hover { background:#ff5252; }
+  .action-btn-success { background:var(--correct); }
+  .action-btn-success:hover { background:#00e676; }
 
   .error { background:#2a0d0d; border:1px solid var(--wrong); color:#ef9a9a; padding:16px; border-radius:8px; margin-bottom:20px; }
+  .success { background:#0d2a1a; border:1px solid var(--correct); color:#81c784; padding:16px; border-radius:8px; margin-bottom:20px; }
+
+  .toolbar { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+  .toolbar input, .toolbar select { background:var(--card); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:6px; font-size:13px; }
+  .toolbar input:focus, .toolbar select:focus { outline:none; border-color:var(--accent); }
+
+  .modal { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center; }
+  .modal.active { display:flex; }
+  .modal-content { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:28px; max-width:600px; width:90%; max-height:90vh; overflow-y:auto; }
+  .modal-header { font-size:18px; font-weight:700; margin-bottom:20px; color:var(--text); }
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; font-size:12px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; }
+  .form-group input, .form-group textarea, .form-group select { width:100%; background:var(--card2); border:1px solid var(--border); color:var(--text); padding:10px; border-radius:6px; font-size:13px; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline:none; border-color:var(--accent); }
+  .form-group textarea { resize:vertical; min-height:100px; }
+  .form-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:20px; }
+  .modal-close { position:absolute; top:16px; right:16px; background:transparent; border:none; color:var(--muted); cursor:pointer; font-size:20px; }
+  .modal-close:hover { color:var(--text); }
 </style>
 </head>
 <body>
@@ -86,6 +110,7 @@
     <button class="tab" onclick="switchTab('users')">👥 Users</button>
     <button class="tab" onclick="switchTab('results')">📈 Results</button>
     <button class="tab" onclick="switchTab('reports')">⚠️ Reports</button>
+    <button class="tab" onclick="switchTab('questions')">❓ Questions</button>
   </div>
 
   <!-- OVERVIEW TAB -->
@@ -178,6 +203,121 @@
       </div>
     </div>
   </div>
+
+  <!-- QUESTIONS TAB -->
+  <div id="questions" class="section">
+    <div id="questionsMsg" class="success" style="display:none;"></div>
+    <div class="toolbar">
+      <input type="text" id="searchQuestions" placeholder="Search questions..." onkeyup="filterQuestions()">
+      <select id="difficultyFilter" onchange="filterQuestions()">
+        <option value="">All Difficulties</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <button class="action-btn" onclick="openAddQuestionModal()">+ Add Question</button>
+      <button class="action-btn action-btn-secondary" onclick="openBulkImportModal()">📤 Bulk Import</button>
+      <button class="action-btn action-btn-secondary" onclick="exportQuestions()">📥 Export</button>
+    </div>
+    <div id="questionsLoading" class="loading">Loading questions...</div>
+    <div id="questionsEmpty" class="empty" style="display:none;">No questions found</div>
+    <div id="questionsTable" style="display:none;">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Question</th>
+              <th>Category</th>
+              <th>Difficulty</th>
+              <th>Correct Answer</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="questionsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD/EDIT QUESTION MODAL -->
+<div id="questionModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('questionModal')">×</button>
+    <div class="modal-header" id="modalTitle">Add New Question</div>
+    <form id="questionForm" onsubmit="saveQuestion(event)">
+      <input type="hidden" id="questionId">
+      <div class="form-group">
+        <label>Question Text *</label>
+        <textarea id="questionText" required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" id="questionCategory" placeholder="e.g., Sitecore CMS, Licensing">
+      </div>
+      <div class="form-group">
+        <label>Difficulty *</label>
+        <select id="questionDifficulty" required>
+          <option value="">Select difficulty</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Option A *</label>
+        <input type="text" id="optionA" required>
+      </div>
+      <div class="form-group">
+        <label>Option B *</label>
+        <input type="text" id="optionB" required>
+      </div>
+      <div class="form-group">
+        <label>Option C *</label>
+        <input type="text" id="optionC" required>
+      </div>
+      <div class="form-group">
+        <label>Option D *</label>
+        <input type="text" id="optionD" required>
+      </div>
+      <div class="form-group">
+        <label>Correct Answer *</label>
+        <select id="correctAnswer" required>
+          <option value="">Select correct option</option>
+          <option value="A">Option A</option>
+          <option value="B">Option B</option>
+          <option value="C">Option C</option>
+          <option value="D">Option D</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="action-btn action-btn-secondary" onclick="closeModal('questionModal')">Cancel</button>
+        <button type="submit" class="action-btn action-btn-success">Save Question</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- BULK IMPORT MODAL -->
+<div id="importModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('importModal')">×</button>
+    <div class="modal-header">Bulk Import Questions</div>
+    <div style="margin-bottom:16px; color:var(--muted); font-size:12px;">
+      <p>Supported formats: JSON or CSV</p>
+      <p style="margin-top:8px;"><strong>JSON format:</strong> [{ "question": "...", "options": ["A", "B", "C", "D"], "correctAnswer": "A", "category": "...", "difficulty": "..." }, ...]</p>
+      <p style="margin-top:8px;"><strong>CSV format:</strong> question,optionA,optionB,optionC,optionD,correctAnswer,category,difficulty</p>
+    </div>
+    <div class="form-group">
+      <label>Select File *</label>
+      <input type="file" id="importFile" accept=".json,.csv" required>
+    </div>
+    <div class="form-actions">
+      <button type="button" class="action-btn action-btn-secondary" onclick="closeModal('importModal')">Cancel</button>
+      <button type="button" class="action-btn action-btn-success" onclick="processBulkImport()">Import</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -201,6 +341,7 @@ function switchTab(tab) {
   else if (tab === 'users') loadUsers();
   else if (tab === 'results') loadResults();
   else if (tab === 'reports') loadReports();
+  else if (tab === 'questions') loadQuestions();
 }
 
 async function loadOverview() {
@@ -349,6 +490,260 @@ function showError(msg) {
   const errorDiv = document.getElementById('errorMsg');
   errorDiv.textContent = 'Error: ' + msg;
   errorDiv.style.display = 'block';
+}
+
+function showSuccess(msg) {
+  const msgDiv = document.getElementById('questionsMsg');
+  msgDiv.textContent = '✓ ' + msg;
+  msgDiv.style.display = 'block';
+  setTimeout(() => msgDiv.style.display = 'none', 3000);
+}
+
+let allQuestions = [];
+
+async function loadQuestions() {
+  try {
+    document.getElementById('questionsLoading').style.display = 'block';
+    document.getElementById('questionsTable').style.display = 'none';
+    document.getElementById('questionsEmpty').style.display = 'none';
+
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${API_BASE}/api/questions`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Failed to load questions');
+
+    allQuestions = await res.json();
+    document.getElementById('questionsLoading').style.display = 'none';
+
+    if (!allQuestions || allQuestions.length === 0) {
+      document.getElementById('questionsEmpty').style.display = 'block';
+      return;
+    }
+
+    displayQuestions(allQuestions);
+  } catch(err) {
+    document.getElementById('questionsLoading').style.display = 'none';
+    showError(err.message);
+  }
+}
+
+function displayQuestions(questions) {
+  document.getElementById('questionsTable').style.display = 'block';
+  const tbody = document.getElementById('questionsBody');
+  tbody.innerHTML = questions.map(q => `
+    <tr>
+      <td style="font-size:11px; color:var(--muted);">${q._id ? q._id.substring(0, 8) : 'N/A'}</td>
+      <td>${q.question ? q.question.substring(0, 60) + '...' : '-'}</td>
+      <td>${q.category || '-'}</td>
+      <td><span class="badge" style="background:${q.difficulty === 'easy' ? '#0d2a1a' : q.difficulty === 'medium' ? '#2a2a0d' : '#2a0d0d'}; color:${q.difficulty === 'easy' ? 'var(--correct)' : q.difficulty === 'medium' ? '#ffa000' : 'var(--wrong)'};">${q.difficulty || '-'}</span></td>
+      <td><strong>${q.correctAnswer || '-'}</strong></td>
+      <td style="display:flex; gap:6px;">
+        <button class="action-btn action-btn-secondary" style="padding:6px 10px; font-size:11px;" onclick="editQuestion('${q._id}')">Edit</button>
+        <button class="action-btn action-btn-secondary" style="padding:6px 10px; font-size:11px;" onclick="duplicateQuestion('${q._id}')">Copy</button>
+        <button class="action-btn action-btn-danger" style="padding:6px 10px; font-size:11px;" onclick="deleteQuestion('${q._id}')">Del</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function filterQuestions() {
+  const searchText = document.getElementById('searchQuestions').value.toLowerCase();
+  const difficulty = document.getElementById('difficultyFilter').value;
+
+  const filtered = allQuestions.filter(q => {
+    const matchesSearch = !searchText || q.question.toLowerCase().includes(searchText) || (q.category && q.category.toLowerCase().includes(searchText));
+    const matchesDifficulty = !difficulty || q.difficulty === difficulty;
+    return matchesSearch && matchesDifficulty;
+  });
+
+  if (filtered.length === 0) {
+    document.getElementById('questionsTable').style.display = 'none';
+    document.getElementById('questionsEmpty').style.display = 'block';
+  } else {
+    displayQuestions(filtered);
+  }
+}
+
+function openAddQuestionModal() {
+  document.getElementById('questionId').value = '';
+  document.getElementById('modalTitle').textContent = 'Add New Question';
+  document.getElementById('questionForm').reset();
+  document.getElementById('questionModal').classList.add('active');
+}
+
+function openBulkImportModal() {
+  document.getElementById('importFile').value = '';
+  document.getElementById('importModal').classList.add('active');
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+}
+
+async function editQuestion(questionId) {
+  try {
+    const question = allQuestions.find(q => q._id === questionId);
+    if (!question) return;
+
+    document.getElementById('questionId').value = question._id;
+    document.getElementById('modalTitle').textContent = 'Edit Question';
+    document.getElementById('questionText').value = question.question;
+    document.getElementById('questionCategory').value = question.category || '';
+    document.getElementById('questionDifficulty').value = question.difficulty || '';
+    document.getElementById('optionA').value = question.options[0] || '';
+    document.getElementById('optionB').value = question.options[1] || '';
+    document.getElementById('optionC').value = question.options[2] || '';
+    document.getElementById('optionD').value = question.options[3] || '';
+    document.getElementById('correctAnswer').value = question.correctAnswer || '';
+    document.getElementById('questionModal').classList.add('active');
+  } catch(err) {
+    showError(err.message);
+  }
+}
+
+async function saveQuestion(event) {
+  event.preventDefault();
+  try {
+    const token = localStorage.getItem('token');
+    const questionId = document.getElementById('questionId').value;
+
+    const payload = {
+      question: document.getElementById('questionText').value,
+      category: document.getElementById('questionCategory').value,
+      difficulty: document.getElementById('questionDifficulty').value,
+      options: [
+        document.getElementById('optionA').value,
+        document.getElementById('optionB').value,
+        document.getElementById('optionC').value,
+        document.getElementById('optionD').value
+      ],
+      correctAnswer: document.getElementById('correctAnswer').value
+    };
+
+    const method = questionId ? 'PATCH' : 'POST';
+    const url = questionId ? `${API_BASE}/api/questions/${questionId}` : `${API_BASE}/api/questions`;
+
+    const res = await fetch(url, {
+      method,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) throw new Error('Failed to save question');
+    showSuccess(questionId ? 'Question updated!' : 'Question added!');
+    closeModal('questionModal');
+    loadQuestions();
+  } catch(err) {
+    showError(err.message);
+  }
+}
+
+async function deleteQuestion(questionId) {
+  if (!confirm('Are you sure you want to delete this question?')) return;
+
+  try {
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${API_BASE}/api/questions/${questionId}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (!res.ok) throw new Error('Failed to delete question');
+    showSuccess('Question deleted!');
+    loadQuestions();
+  } catch(err) {
+    showError(err.message);
+  }
+}
+
+async function duplicateQuestion(questionId) {
+  try {
+    const token = localStorage.getItem('token');
+    const question = allQuestions.find(q => q._id === questionId);
+    if (!question) return;
+
+    const payload = {
+      question: question.question + ' (Copy)',
+      category: question.category,
+      difficulty: question.difficulty,
+      options: question.options,
+      correctAnswer: question.correctAnswer
+    };
+
+    const res = await fetch(`${API_BASE}/api/questions`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) throw new Error('Failed to duplicate question');
+    showSuccess('Question duplicated!');
+    loadQuestions();
+  } catch(err) {
+    showError(err.message);
+  }
+}
+
+async function processBulkImport() {
+  try {
+    const file = document.getElementById('importFile').files[0];
+    if (!file) return;
+
+    const text = await file.text();
+    let questions = [];
+
+    if (file.name.endsWith('.json')) {
+      questions = JSON.parse(text);
+    } else if (file.name.endsWith('.csv')) {
+      const lines = text.split('\n').slice(1);
+      questions = lines.filter(l => l.trim()).map(line => {
+        const [question, optionA, optionB, optionC, optionD, correctAnswer, category, difficulty] = line.split(',').map(s => s.trim());
+        return { question, options: [optionA, optionB, optionC, optionD], correctAnswer, category, difficulty };
+      });
+    } else {
+      throw new Error('Unsupported file format');
+    }
+
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${API_BASE}/api/questions/bulk/import`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ questions })
+    });
+
+    if (!res.ok) throw new Error('Failed to import questions');
+    showSuccess(`${questions.length} questions imported!`);
+    closeModal('importModal');
+    loadQuestions();
+  } catch(err) {
+    showError(err.message);
+  }
+}
+
+function exportQuestions() {
+  try {
+    const dataStr = JSON.stringify(allQuestions, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `questions_export_${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+    showSuccess('Questions exported!');
+  } catch(err) {
+    showError(err.message);
+  }
 }
 
 // Check auth and load overview on page load

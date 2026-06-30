@@ -21,7 +21,7 @@ const authenticate = (req, res, next) => {
 // Get all questions (public - for exam)
 router.get('/', async (req, res) => {
   try {
-    const questions = await Question.find().sort({ id: 1 });
+    const questions = await Question.find().sort({ createdAt: -1 });
     res.json(questions);
   } catch(err) {
     res.status(500).json({ error: err.message });
@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 // Get single question
 router.get('/:id', async (req, res) => {
   try {
-    const question = await Question.findOne({ id: parseInt(req.params.id) });
+    const question = await Question.findById(req.params.id);
     if (!question) return res.status(404).json({ error: 'Question not found' });
     res.json(question);
   } catch(err) {
@@ -42,25 +42,18 @@ router.get('/:id', async (req, res) => {
 // Create question (admin only)
 router.post('/', authenticate, async (req, res) => {
   try {
-    const { id, question, options, answer, multi, source, difficulty, topic, notes } = req.body;
+    const { question, options, correctAnswer, category, difficulty } = req.body;
 
-    if (!question || !options || !answer) {
+    if (!question || !options || !correctAnswer) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Get next ID if not provided
-    const nextId = id || (await Question.findOne().sort({ id: -1 }).then(q => (q?.id || 0) + 1));
-
     const newQuestion = new Question({
-      id: nextId,
       question,
       options,
-      answer,
-      multi: multi || false,
-      source: source || 'admin',
+      correctAnswer,
+      category: category || 'General',
       difficulty: difficulty || 'medium',
-      topic,
-      notes,
       verified: false
     });
 
@@ -74,17 +67,16 @@ router.post('/', authenticate, async (req, res) => {
 // Update question (admin only)
 router.patch('/:id', authenticate, async (req, res) => {
   try {
-    const { question, options, answer, difficulty, topic, notes, verified } = req.body;
+    const { question, options, correctAnswer, category, difficulty, verified } = req.body;
 
-    const updated = await Question.findOneAndUpdate(
-      { id: parseInt(req.params.id) },
+    const updated = await Question.findByIdAndUpdate(
+      req.params.id,
       {
         ...(question && { question }),
         ...(options && { options }),
-        ...(answer && { answer }),
+        ...(correctAnswer && { correctAnswer }),
+        ...(category && { category }),
         ...(difficulty && { difficulty }),
-        ...(topic && { topic }),
-        ...(notes && { notes }),
         ...(verified !== undefined && { verified }),
         updatedAt: new Date()
       },
@@ -102,9 +94,9 @@ router.patch('/:id', authenticate, async (req, res) => {
 // Delete question (admin only)
 router.delete('/:id', authenticate, async (req, res) => {
   try {
-    const deleted = await Question.findOneAndDelete({ id: parseInt(req.params.id) });
+    const deleted = await Question.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ error: 'Question not found' });
-    res.json({ message: 'Deleted', id: deleted.id });
+    res.json({ message: 'Deleted', _id: deleted._id });
   } catch(err) {
     res.status(500).json({ error: err.message });
   }
@@ -118,7 +110,7 @@ router.post('/:id/report', async (req, res) => {
     if (!issue) return res.status(400).json({ error: 'Issue description required' });
 
     const report = new QuestionReport({
-      questionId: parseInt(req.params.id),
+      questionId: req.params.id,
       userId: userId || null,
       userEmail: userEmail || 'anonymous',
       issue
@@ -127,12 +119,12 @@ router.post('/:id/report', async (req, res) => {
     await report.save();
 
     // Increment report count
-    await Question.findOneAndUpdate(
-      { id: parseInt(req.params.id) },
+    await Question.findByIdAndUpdate(
+      req.params.id,
       { $inc: { reportCount: 1 } }
     );
 
-    res.status(201).json({ message: 'Report submitted', id: report._id });
+    res.status(201).json({ message: 'Report submitted', _id: report._id });
   } catch(err) {
     res.status(500).json({ error: err.message });
   }
