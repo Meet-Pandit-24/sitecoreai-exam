@@ -175,8 +175,9 @@
 <body>
 
 <div id="welcome">
-  <div style="position:absolute;top:20px;right:24px;display:flex;align-items:center;gap:16px;">
+  <div style="position:absolute;top:20px;right:24px;display:flex;align-items:center;gap:12px;">
     <span id="userEmailWelcome" style="font-size:13px;color:var(--muted);">Loading...</span>
+    <button id="adminBtn" onclick="window.location.href='/admin.html'" style="padding:8px 16px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:12px;transition:all 0.2s;display:none;">🔐 Admin</button>
     <button onclick="logout()" style="padding:8px 16px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:12px;transition:all 0.2s;">Logout</button>
   </div>
 
@@ -662,6 +663,11 @@ function initializeUserInfo() {
     const userEmailWelcome = document.getElementById('userEmailWelcome');
     if (userEmailWelcome) {
       userEmailWelcome.textContent = user.email;
+    }
+    // Show admin button if user is admin
+    const adminBtn = document.getElementById('adminBtn');
+    if (adminBtn && user.isAdmin) {
+      adminBtn.style.display = 'block';
     }
   } else {
     window.location.href = '/login.html';

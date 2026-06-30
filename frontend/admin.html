@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - SitecoreAI</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card2: #222535;
+    --border: #2d3148;
+    --accent: #e53935;
+    --text: #e8eaf6;
+    --muted: #8f9bb3;
+    --correct: #00c853;
+    --wrong: #f44336;
+  }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .topbar { background:linear-gradient(135deg, var(--card) 0%, #1a1f2e 100%); border-bottom:2px solid var(--accent); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+  .topbar-title { font-size:18px; font-weight:700; color:#fff; letter-spacing:0.5px; }
+  .topbar-right { display:flex; align-items:center; gap:16px; }
+  .logout-btn { padding:8px 16px; background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:6px; cursor:pointer; font-size:12px; transition:all 0.2s; }
+  .logout-btn:hover { border-color:var(--accent); color:var(--text); }
+
+  .container { max-width:1400px; margin:0 auto; padding:28px; }
+  .header { margin-bottom:32px; }
+  .header h1 { font-size:28px; font-weight:700; margin-bottom:8px; }
+  .header p { color:var(--muted); font-size:14px; }
+
+  .tabs { display:flex; gap:16px; margin-bottom:28px; border-bottom:2px solid var(--border); }
+  .tab { padding:12px 20px; background:transparent; border:none; color:var(--muted); cursor:pointer; font-size:14px; font-weight:600; transition:all 0.2s; border-bottom:3px solid transparent; }
+  .tab:hover { color:var(--text); }
+  .tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:32px; }
+  .stat-card { background:linear-gradient(135deg, var(--card) 0%, #1e2237 100%); border:1px solid var(--border); border-radius:10px; padding:20px; }
+  .stat-value { font-size:32px; font-weight:700; color:var(--accent); }
+  .stat-label { font-size:12px; color:var(--muted); margin-top:8px; text-transform:uppercase; letter-spacing:0.5px; }
+
+  .section { display:none; }
+  .section.active { display:block; }
+
+  .table-container { background:var(--card); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  .table { width:100%; border-collapse:collapse; }
+  .table th { background:linear-gradient(135deg, var(--card) 0%, #1e2237 100%); padding:16px; text-align:left; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600; border-bottom:2px solid var(--border); }
+  .table td { padding:16px; border-bottom:1px solid var(--border); }
+  .table tbody tr:hover { background:var(--card2); }
+  .table tbody tr:last-child td { border-bottom:none; }
+
+  .badge { display:inline-block; padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600; }
+  .badge-passed { background:#0d2a1a; color:var(--correct); }
+  .badge-failed { background:#2a0d0d; color:var(--wrong); }
+
+  .loading { text-align:center; padding:40px; color:var(--muted); }
+  .empty { text-align:center; padding:60px 20px; color:var(--muted); }
+
+  .action-btn { padding:8px 14px; background:var(--accent); color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; transition:all 0.2s; }
+  .action-btn:hover { background:#ff6659; }
+
+  .error { background:#2a0d0d; border:1px solid var(--wrong); color:#ef9a9a; padding:16px; border-radius:8px; margin-bottom:20px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-title">🔐 Admin Dashboard</div>
+  <div class="topbar-right">
+    <div style="font-size:12px; color:var(--muted);" id="adminInfo">Loading...</div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="header">
+    <h1>SitecoreAI Administration</h1>
+    <p>Manage users, view results, and monitor system activity</p>
+  </div>
+
+  <div id="errorMsg" class="error" style="display:none;"></div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('overview')">📊 Overview</button>
+    <button class="tab" onclick="switchTab('users')">👥 Users</button>
+    <button class="tab" onclick="switchTab('results')">📈 Results</button>
+    <button class="tab" onclick="switchTab('reports')">⚠️ Reports</button>
+  </div>
+
+  <!-- OVERVIEW TAB -->
+  <div id="overview" class="section active">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="totalUsers">0</div>
+        <div class="stat-label">Total Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="totalAttempts">0</div>
+        <div class="stat-label">Total Attempts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="passRate">0%</div>
+        <div class="stat-label">Overall Pass Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="avgScore">0%</div>
+        <div class="stat-label">Average Score</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USERS TAB -->
+  <div id="users" class="section">
+    <div id="usersLoading" class="loading">Loading users...</div>
+    <div id="usersEmpty" class="empty" style="display:none;">No users found</div>
+    <div id="usersTable" style="display:none;">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Name</th>
+              <th>Admin</th>
+              <th>Last Login</th>
+              <th>Attempts</th>
+            </tr>
+          </thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS TAB -->
+  <div id="results" class="section">
+    <div id="resultsLoading" class="loading">Loading results...</div>
+    <div id="resultsEmpty" class="empty" style="display:none;">No results found</div>
+    <div id="resultsTable" style="display:none;">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User Email</th>
+              <th>Date</th>
+              <th>Score</th>
+              <th>Status</th>
+              <th>Correct</th>
+              <th>Wrong</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORTS TAB -->
+  <div id="reports" class="section">
+    <div id="reportsLoading" class="loading">Loading reports...</div>
+    <div id="reportsEmpty" class="empty" style="display:none;">No reported issues</div>
+    <div id="reportsTable" style="display:none;">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Question ID</th>
+              <th>Reporter</th>
+              <th>Issue</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="reportsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_BASE = 'https://sitecoreai-exam-production.up.railway.app';
+
+async function logout() {
+  if (confirm('Are you sure you want to log out?')) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = '/login.html';
+  }
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+  event.target.classList.add('active');
+
+  if (tab === 'overview') loadOverview();
+  else if (tab === 'users') loadUsers();
+  else if (tab === 'results') loadResults();
+  else if (tab === 'reports') loadReports();
+}
+
+async function loadOverview() {
+  try {
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${API_BASE}/api/admin/dashboard/stats`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Failed to load stats');
+
+    const data = await res.json();
+    document.getElementById('totalUsers').textContent = data.totalUsers || 0;
+    document.getElementById('totalAttempts').textContent = data.totalAttempts || 0;
+    document.getElementById('passRate').textContent = Math.round(data.passRate || 0) + '%';
+    document.getElementById('avgScore').textContent = Math.round(data.avgScore || 0) + '%';
+  } catch(err) {
+    showError(err.message);
+  }
+}
+
+async function loadUsers() {
+  try {
+    document.getElementById('usersLoading').style.display = 'block';
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${API_BASE}/api/admin/users`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Failed to load users');
+
+    const users = await res.json();
+    document.getElementById('usersLoading').style.display = 'none';
+
+    if (!users || users.length === 0) {
+      document.getElementById('usersEmpty').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('usersTable').style.display = 'block';
+    const tbody = document.getElementById('usersBody');
+    tbody.innerHTML = users.map(u => `
+      <tr>
+        <td>${u.email}</td>
+        <td>${u.name || '-'}</td>
+        <td>${u.isAdmin ? '✓ Admin' : '-'}</td>
+        <td>${u.lastLogin ? new Date(u.lastLogin).toLocaleDateString() : '-'}</td>
+        <td>${u.attemptCount || 0}</td>
+      </tr>
+    `).join('');
+  } catch(err) {
+    document.getElementById('usersLoading').style.display = 'none';
+    showError(err.message);
+  }
+}
+
+async function loadResults() {
+  try {
+    document.getElementById('resultsLoading').style.display = 'block';
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${API_BASE}/api/admin/results`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Failed to load results');
+
+    const results = await res.json();
+    document.getElementById('resultsLoading').style.display = 'none';
+
+    if (!results || results.length === 0) {
+      document.getElementById('resultsEmpty').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('resultsTable').style.display = 'block';
+    const tbody = document.getElementById('resultsBody');
+    tbody.innerHTML = results.map(r => `
+      <tr>
+        <td>${r.userEmail}</td>
+        <td>${new Date(r.createdAt).toLocaleDateString()}</td>
+        <td><strong style="color:${r.passed ? 'var(--correct)' : 'var(--wrong)'};">${r.scorePercentage}%</strong></td>
+        <td><span class="badge ${r.passed ? 'badge-passed' : 'badge-failed'}">${r.passed ? 'PASSED' : 'FAILED'}</span></td>
+        <td style="color:var(--correct);">${r.correct}</td>
+        <td style="color:var(--wrong);">${r.wrong}</td>
+        <td>${Math.floor(r.timeUsed / 60)}m</td>
+      </tr>
+    `).join('');
+  } catch(err) {
+    document.getElementById('resultsLoading').style.display = 'none';
+    showError(err.message);
+  }
+}
+
+async function loadReports() {
+  try {
+    document.getElementById('reportsLoading').style.display = 'block';
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${API_BASE}/api/admin/reports`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Failed to load reports');
+
+    const reports = await res.json();
+    document.getElementById('reportsLoading').style.display = 'none';
+
+    if (!reports || reports.length === 0) {
+      document.getElementById('reportsEmpty').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('reportsTable').style.display = 'block';
+    const tbody = document.getElementById('reportsBody');
+    tbody.innerHTML = reports.map(r => `
+      <tr>
+        <td>${r.questionId}</td>
+        <td>${r.reportedBy || 'Anonymous'}</td>
+        <td>${r.issue.substring(0, 50)}...</td>
+        <td>${new Date(r.createdAt).toLocaleDateString()}</td>
+        <td><span class="badge" style="background:${r.resolved ? '#0d2a1a' : '#2a2a0d'}; color:${r.resolved ? 'var(--correct)' : '#ffa000'};">${r.resolved ? 'RESOLVED' : 'OPEN'}</span></td>
+        <td><button class="action-btn" onclick="markResolved('${r._id}')">Resolve</button></td>
+      </tr>
+    `).join('');
+  } catch(err) {
+    document.getElementById('reportsLoading').style.display = 'none';
+    showError(err.message);
+  }
+}
+
+async function markResolved(reportId) {
+  try {
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${API_BASE}/api/admin/reports/${reportId}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ resolved: true })
+    });
+    if (!res.ok) throw new Error('Failed to resolve report');
+    loadReports();
+  } catch(err) {
+    showError(err.message);
+  }
+}
+
+function showError(msg) {
+  const errorDiv = document.getElementById('errorMsg');
+  errorDiv.textContent = 'Error: ' + msg;
+  errorDiv.style.display = 'block';
+}
+
+// Check auth and load overview on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  if (!token) {
+    window.location.href = '/login.html';
+    return;
+  }
+
+  document.getElementById('adminInfo').textContent = user.email || 'Admin';
+  loadOverview();
+});
+</script>
+
+</body>
+</html>
