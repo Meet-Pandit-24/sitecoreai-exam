@@ -1,0 +1,9 @@
+run = "npm install && npm start"
+modules = ["nodejs-20"]
+
+[nix]
+channel = "unstable"
+
+[deployment]
+build = ["npm", "install"]
+run = ["node", "server.js"]
