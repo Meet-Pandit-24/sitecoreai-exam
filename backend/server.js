@@ -6,6 +6,10 @@ const path = require('path');
 
 dotenv.config();
 
+console.log('🚀 Starting SitecoreAI Backend Server...');
+console.log('Environment:', process.env.NODE_ENV || 'development');
+console.log('MongoDB URI:', process.env.MONGODB_URI ? '✅ Configured' : '❌ Missing');
+
 const app = express();
 
 // Middleware
