@@ -40,10 +40,18 @@ app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // Database Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://user:pass@cluster.mongodb.net/sitecoreai-exam', {
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://user:pass@cluster.mongodb.net/sitecoreai-exam';
+console.log('📚 Connecting to MongoDB...');
+
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).catch(err => console.error('DB Connection Error:', err));
+})
+.then(() => console.log('✅ MongoDB Connected'))
+.catch(err => {
+  console.error('❌ MongoDB Connection Error:', err.message);
+  console.error('URI Preview:', mongoURI.substring(0, 50) + '...');
+});
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
