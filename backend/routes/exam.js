@@ -95,6 +95,8 @@ router.post('/submit', authenticate, async (req, res) => {
 
     // Send result email (async, don't wait)
     const emailEnabled = process.env.EMAIL_ENABLED !== 'false';
+    console.log('[EXAM-DEBUG] EMAIL_ENABLED env:', process.env.EMAIL_ENABLED);
+    console.log('[EXAM-DEBUG] emailEnabled boolean:', emailEnabled);
     if (emailEnabled) {
       console.log('[EXAM] Sending result email to:', user.email);
       sendResultEmail(user.email, user.name, result)

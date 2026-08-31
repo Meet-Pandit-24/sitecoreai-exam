@@ -76,6 +76,8 @@ router.post('/request-otp', async (req, res) => {
 
     // Send OTP email or log to console if email disabled
     const emailEnabled = process.env.EMAIL_ENABLED !== 'false';
+    console.log('[OTP-DEBUG] EMAIL_ENABLED env:', process.env.EMAIL_ENABLED);
+    console.log('[OTP-DEBUG] emailEnabled boolean:', emailEnabled);
 
     if (emailEnabled) {
       console.log('[OTP] Sending email from:', process.env.FROM_EMAIL, 'to:', email);
