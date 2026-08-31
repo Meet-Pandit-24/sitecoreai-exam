@@ -17,6 +17,7 @@ const app = express();
 const corsOptions = {
   origin: function(origin, callback) {
     const allowedOrigins = [
+      'https://sitecoreai-exam.onrender.com',
       'https://sitecoreai-exam.vercel.app',
       'http://localhost:3000',
       'http://localhost:3001',
