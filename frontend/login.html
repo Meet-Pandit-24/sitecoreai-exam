@@ -149,11 +149,23 @@ async function requestOTP() {
       throw new Error((await res.json()).error);
     }
 
+    const data = await res.json();
     currentEmail = email;
     document.getElementById('emailDisplay').textContent = email;
     document.getElementById('successMsg').style.display = 'block';
     errorDiv.style.display = 'none';
-    setTimeout(() => goStep2(), 1500);
+
+    setTimeout(() => {
+      goStep2();
+      // Auto-fill and submit if testOtp is in response (testing mode)
+      if (data.testOtp) {
+        setTimeout(() => {
+          document.getElementById('otpInput').value = data.testOtp;
+          console.log('🔑 Test OTP auto-filled:', data.testOtp);
+          verifyOTP();
+        }, 800);
+      }
+    }, 1500);
   } catch(err) {
     errorDiv.textContent = err.message;
     errorDiv.style.display = 'block';
