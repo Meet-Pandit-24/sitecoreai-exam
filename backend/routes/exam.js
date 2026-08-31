@@ -94,10 +94,15 @@ router.post('/submit', authenticate, async (req, res) => {
     console.log('[EXAM] Result saved:', result._id);
 
     // Send result email (async, don't wait)
-    console.log('[EXAM] Sending result email to:', user.email);
-    sendResultEmail(user.email, user.name, result)
-      .then(() => console.log('[EXAM] Result email sent successfully'))
-      .catch(err => console.error('[EXAM] Result email error:', err.message));
+    const emailEnabled = process.env.EMAIL_ENABLED !== 'false';
+    if (emailEnabled) {
+      console.log('[EXAM] Sending result email to:', user.email);
+      sendResultEmail(user.email, user.name, result)
+        .then(() => console.log('[EXAM] Result email sent successfully'))
+        .catch(err => console.error('[EXAM] Result email error:', err.message));
+    } else {
+      console.log('[EXAM] ⚠️ EMAIL DISABLED - Result email not sent');
+    }
 
     res.json({
       resultId: result._id,
