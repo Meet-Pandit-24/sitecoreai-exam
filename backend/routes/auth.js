@@ -75,8 +75,8 @@ router.post('/request-otp', async (req, res) => {
     console.log('[OTP] User saved to database');
 
     // Send OTP email or log to console if email disabled
-    const emailEnabled = process.env.EMAIL_ENABLED !== 'false';
-    console.log('[OTP-DEBUG] EMAIL_ENABLED env:', process.env.EMAIL_ENABLED);
+    const emailEnabled = process.env.ENABLE_EMAIL !== 'false';
+    console.log('[OTP-DEBUG] ENABLE_EMAIL env:', process.env.ENABLE_EMAIL);
     console.log('[OTP-DEBUG] emailEnabled boolean:', emailEnabled);
 
     if (emailEnabled) {
