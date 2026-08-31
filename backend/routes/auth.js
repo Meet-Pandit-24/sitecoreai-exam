@@ -74,16 +74,28 @@ router.post('/request-otp', async (req, res) => {
     await user.save();
     console.log('[OTP] User saved to database');
 
-    // Send OTP email
-    console.log('[OTP] Sending email from:', process.env.FROM_EMAIL, 'to:', email);
-    await sendEmail(email, 'SitecoreAI Exam - Login Code', `
-      <h2>Your OTP Code</h2>
-      <p>Use this code to log in: <strong>${otp}</strong></p>
-      <p>Code expires in 15 minutes.</p>
-    `);
-    console.log('[OTP] Email sent successfully');
+    // Send OTP email or log to console if email disabled
+    const emailEnabled = process.env.EMAIL_ENABLED !== 'false';
 
-    res.json({ message: 'OTP sent to email', email });
+    if (emailEnabled) {
+      console.log('[OTP] Sending email from:', process.env.FROM_EMAIL, 'to:', email);
+      await sendEmail(email, 'SitecoreAI Exam - Login Code', `
+        <h2>Your OTP Code</h2>
+        <p>Use this code to log in: <strong>${otp}</strong></p>
+        <p>Code expires in 15 minutes.</p>
+      `);
+      console.log('[OTP] Email sent successfully');
+      res.json({ message: 'OTP sent to email', email });
+    } else {
+      // Email disabled - log OTP to console for testing
+      console.log('[OTP] ⚠️ EMAIL DISABLED - OTP NOT SENT');
+      console.log('[OTP] 🔑 TEST OTP CODE:', otp);
+      res.json({
+        message: 'Email disabled - OTP logged to console',
+        email,
+        testOtp: otp // For testing only
+      });
+    }
   } catch(err) {
     console.error('[OTP] Error:', err.message);
     res.status(500).json({ error: err.message });
